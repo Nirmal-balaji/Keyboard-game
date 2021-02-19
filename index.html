@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Image change through button Click</title>
+    <style>
+
+
+      #hi {
+        font-family: 'Press Start 2P', cursive;
+        font-size: 3rem;
+        margin:  5%;
+        color: #FEF2BF;
+      }
+
+      body {
+        text-align: center;
+        background-color: #011F3F;
+      }
+
+      .game-over {
+        background-color: red;
+        opacity: 0.8;
+      }
+
+      .pressed {
+        box-shadow: 0 0 20px white;
+        background-color: grey;
+      }
+
+      .btn{
+        height: 100px;
+      }
+
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <h1 id="hi">Press Any Key to Start the Game.</h1>
+    <button id="btn" onclick="location.reload()">Restart</button>
+    <button id="btn" onclick="">Read How to Play ?</button>
+    <br><br><br><br><br>
+    <div align="center">
+    <button id="A" class="btn A" onclick="A()">A</button>
+    <button id="A1" class="btn A1" onclick="A1()">A#</button>
+    <button id="B"  class="btn B" onclick="B()">B</button>
+    <button id="C"  class="btn C" onclick="C()">C</button>
+    <button id="C1"  class="btn C1" onclick="C1()">C#</button>
+    <button id="D"  class="btn D" onclick="D()">D</button>
+    <button id="D1"  class="btn D1" onclick="D1()">D#</button>
+    <button id="E"  class="btn E" onclick="E()">E</button>
+    <button id="F"  class="btn F" onclick="F()">F</button>
+    <button id="F1"  class="btn F1" onclick="F1()">F#</button>
+    <button id="G"  class="btn G" onclick="G()">G</button>
+    <button id="G1"  class="btn G1" onclick="G1()">G#</button>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+   var button = ["A", "A1", "B", "C", "C1", "D", "D1", "E", "F", "F1", "G", "G1"];
+   var gamePattern = [];
+   var userClickedPattern =[];
+   var started = false;
+   var level = 0;
+
+   $(document).keypress(function (){
+     if(!started) {
+       $("#hi").text("Level" + level);
+       nextSequence();
+       started = true;
+     }
+     }
+   );
+
+  $(".btn").click(function() {
+    var userChosenButton = $(this).attr("id");
+    userClickedPattern.push(userChosenButton);
+
+    checkAnswer(userClickedPattern.length-1);
+  }
+);
+
+function checkAnswer(currentLevel) {
+
+  if(gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+    if (userClickedPattern.length === gamePattern.length) {
+      setTimeout (function () {
+        nextSequence();
+      },1000);
+    }
+  } else {
+      wrong();
+      $("body").addClass("game-over");
+      $("#hi").text("Game Over, Press Any Key to Restart");
+
+      setTimeout(function() {
+        $("body").removeClass("game-over");
+      }, 200);
+
+  }
+}
+
+
+   function nextSequence() {
+     userClickedPattern =[];
+     level++;
+     $("#hi").text("Level" + level);
+     var randomNumber = Math.floor(Math.random() * 12);
+     var randomChosenbutton = button[randomNumber];
+     gamePattern.push(randomChosenbutton);
+
+     $("#" + randomChosenbutton).fadeIn(100).fadeOut(100).fadeIn(100);
+     playSound(randomChosenbutton);
+  }
+
+  function playSound(name){
+   var audio = new Audio(name + ".wav");
+   audio.play();
+  }
+
+
+  function wrong(){
+   var audioElement = new Audio('wrong.mp3');
+   audioElement.play();
+  }
+
+
+
+  function A(){
+   var audioElement1 = new Audio('A.wav');
+   audioElement1.play();
+  }
+
+  function A1(){
+   var audioElement2 = new Audio('A1.wav');
+   audioElement2.play();
+  }
+
+  function B(){
+   var audioElement3 = new Audio('B.wav');
+   audioElement3.play();
+  }
+
+  function C(){
+   var audioElement4 = new Audio('C.wav');
+   audioElement4.play();
+  }
+
+  function C1(){
+   var audioElement5 = new Audio('C1.wav');
+   audioElement5.play();
+  }
+
+  function D(){
+   var audioElement6 = new Audio('D.wav');
+   audioElement6.play();
+  }
+
+  function D1(){
+   var audioElement7 = new Audio('D1.wav');
+   audioElement7.play();
+  }
+
+  function E(){
+   var audioElement8 = new Audio('E.wav');
+   audioElement8.play();
+  }
+
+  function F(){
+   var audioElement9 = new Audio('F.wav');
+   audioElement9.play();
+  }
+
+  function F1(){
+   var audioElement10 = new Audio('F1.wav');
+   audioElement10.play();
+  }
+
+  function G(){
+   var audioElement11 = new Audio('G.wav');
+   audioElement11.play();
+  }
+
+  function G1(){
+   var audioElement12 = new Audio('G1.wav');
+   audioElement12.play();
+  }
+
+
+    </script>
+  </body>
+</html>
